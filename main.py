@@ -33,7 +33,7 @@ def draw_base():
 def draw_pole(pos, h):
     i, j = int(n * pos[0]), int(n * pos[1])
     for k in range(h):
-        scene.set_voxel(vec3(i, k, j), 1, vec3(119.0, 123.0, 106.0) / 255.0)
+        scene.set_voxel(vec3(i, k, j), 2, vec3(119.0, 123.0, 106.0) / 255.0)
 
 @ti.func
 def p_to_x(p):
@@ -157,10 +157,10 @@ def draw_car(scale, h, shiftz):
 def initialize_voxels():
     draw_base()
 
-    draw_pole((0.25, 0.3), 47)
-    draw_pole((-0.25, 0.3), 47)
-    draw_pole((0.25, -0.3), 47)
-    draw_pole((-0.25, -0.3), 47)
+    draw_pole((0.25, 0.35), 47)
+    draw_pole((-0.25, 0.35), 47)
+    draw_pole((0.25, -0.35), 47)
+    draw_pole((-0.25, -0.35), 47)
 
     draw_roof(0.45, 0.37, 0.1)
     draw_car(0.45, 0.0, 0.0)

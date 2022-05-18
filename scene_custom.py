@@ -5,8 +5,8 @@ import numpy as np
 import taichi as ti
 from renderer import Renderer
 from math_utils import np_normalize, np_rotate_matrix
+import math
 import __main__
-
 
 VOXEL_DX = 1 / 64
 SCREEN_RES = (1280, 720)
@@ -31,11 +31,17 @@ class Camera:
         self._up = np_normalize(np.array(up))
         self._last_mouse_pos = None
 
+        self._auto_rotate = False
+        self._spp = 0
+        self._last_spp = 0
+        self._spp_manual = 0
+
     @property
     def mouse_exclusive_owner(self):
         return True
 
-    def update_camera(self):
+    def update_camera(self, time):
+        self._spp = time
         res = self._update_by_wasd()
         res = self._update_by_mouse() or res
         return res
@@ -85,6 +91,32 @@ class Camera:
                 pressed = True
                 dir += np.array(d)
         # custom
+        if win.is_pressed('a'):
+            self._auto_rotate = not self._auto_rotate
+
+        if self._auto_rotate and self._spp -self._last_spp > 0.25:
+            self._last_spp = self._spp
+            self._lookat_pos = np.array([0.0, 0.2, 0.0])
+            x = 0.20
+            z = 1.0
+            theta = 0.1 * self._spp
+            xx = x * math.cos(theta) + z * math.sin(theta)
+            zz = -x * math.sin(theta) + z * math.cos(theta)
+            self._camera_pos = np.array([xx, 0.6, zz]) * 4.0
+            return True
+
+        if win.is_pressed('m'):
+            pressed = True
+            self._spp_manual += 0.25
+            self._lookat_pos = np.array([0.0, 0.2, 0.0])
+            x = 0.20
+            z = 1.0
+            theta = 0.1 * self._spp_manual
+            xx = x * math.cos(theta) + z * math.sin(theta)
+            zz = -x * math.sin(theta) + z * math.cos(theta)
+            self._camera_pos = np.array([xx, 0.6, zz]) * 4.0
+            return True
+
         if win.is_pressed('b'):
             pressed = True
             self._lookat_pos = np.array([0.0, 0.2, 0.0])
@@ -175,7 +207,7 @@ class Scene:
         while self.window.running:
             should_reset_framebuffer = False
 
-            if self.camera.update_camera():
+            if self.camera.update_camera(time.time()):
                 self.renderer.set_camera_pos(*self.camera.position)
                 look_at = self.camera.look_at
                 self.renderer.set_look_at(*look_at)
