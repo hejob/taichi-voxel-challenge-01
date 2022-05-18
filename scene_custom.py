@@ -102,7 +102,7 @@ class Camera:
             theta = 0.1 * self._spp
             xx = x * math.cos(theta) + z * math.sin(theta)
             zz = -x * math.sin(theta) + z * math.cos(theta)
-            self._camera_pos = np.array([xx, 0.6, zz]) * 4.0
+            self._camera_pos = np.array([xx, 0.4, zz]) * 4.0
             return True
 
         if win.is_pressed('m'):
@@ -114,18 +114,18 @@ class Camera:
             theta = 0.1 * self._spp_manual
             xx = x * math.cos(theta) + z * math.sin(theta)
             zz = -x * math.sin(theta) + z * math.cos(theta)
-            self._camera_pos = np.array([xx, 0.6, zz]) * 4.0
+            self._camera_pos = np.array([xx, 0.4, zz]) * 4.0
             return True
 
         if win.is_pressed('b'):
             pressed = True
             self._lookat_pos = np.array([0.0, 0.2, 0.0])
-            self._camera_pos = np.array([0.20, 0.6, 1.0]) * 4.0
+            self._camera_pos = np.array([0.20, 0.4, 1.0]) * 4.0
             return True
         elif win.is_pressed('n'):
             pressed = True
             self._lookat_pos = np.array([0.0, 0.2, 0.0])
-            self._camera_pos = np.array([-0.20, 0.6, -1.0]) * 4.0
+            self._camera_pos = np.array([-0.20, 0.4, -1.0]) * 4.0
             return True
         if not pressed:
             return False
