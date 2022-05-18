@@ -12,7 +12,7 @@ positions:
      3
 1 2     4   5
 ....
-     8
+     87
 6 7     9   10
 
 P6~10 is Y-shifting of P1~5

@@ -1,4 +1,4 @@
-from scene import Scene
+from scene_autorotate import Scene # from scene import Scene
 import taichi as ti; from taichi.math import *
 
 n=64; scene=Scene(voxel_edges=0.02,exposure=2); scene.set_background_color(vec3(62.0,246.0,251.0)/255.0)

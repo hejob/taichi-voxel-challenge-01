@@ -31,7 +31,7 @@ class Camera:
         self._up = np_normalize(np.array(up))
         self._last_mouse_pos = None
 
-        self._auto_rotate = False
+        self._auto_rotate = True
         self._spp = 0
         self._last_spp = 0
         self._spp_manual = 0
@@ -91,19 +91,22 @@ class Camera:
                 pressed = True
                 dir += np.array(d)
         # custom
-        if win.is_pressed('a'):
+        if win.is_pressed('t'):
             self._auto_rotate = not self._auto_rotate
 
-        if self._auto_rotate and self._spp -self._last_spp > 0.25:
-            self._last_spp = self._spp
-            self._lookat_pos = np.array([0.0, 0.2, 0.0])
-            x = 0.20
-            z = 1.0
-            theta = 0.1 * self._spp
-            xx = x * math.cos(theta) + z * math.sin(theta)
-            zz = -x * math.sin(theta) + z * math.cos(theta)
-            self._camera_pos = np.array([xx, 0.4, zz]) * 4.0
-            return True
+        if self._auto_rotate:
+            if self._spp -self._last_spp > 0.25:
+                self._last_spp = self._spp
+                self._lookat_pos = np.array([0.0, 0.2, 0.0])
+                x = 0.20
+                z = 1.0
+                theta = 0.1 * self._spp
+                xx = x * math.cos(theta) + z * math.sin(theta)
+                zz = -x * math.sin(theta) + z * math.cos(theta)
+                self._camera_pos = np.array([xx, 0.4, zz]) * 4.0
+                return True
+            else:
+                return False
 
         if win.is_pressed('m'):
             pressed = True
