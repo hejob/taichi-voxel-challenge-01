@@ -1,69 +1,42 @@
-# <a name="title">Taichi Voxel Challenge</a>
+# <a name="title">Taichi Voxel Challenge: Ambiguous Garage Roof</a>
 
 <p align="center">
-<img src="demo.jpg" width="75%"></img>
+<img src="front.jpg" width="45%"></img>
+<img src="back.jpg" width="45%"></img>
 </p>
 
-> Figure: result of `python3 example6.py`. Please replace the image above (`demo.jpg`) with yours, so that other people can immediately see your results :-)
+> Figure: garage roof and car seen from front and back in precisely the same settings.
 
-We invite you to create your voxel artwork, by putting your [Taichi](https://github.com/taichi-dev/taichi) code in `main.py`!
+## References
 
-Rules:
+The short program is a simplified demo for one work borrowed from [Ambiguous Objects by Dr. Kokichi Sugihara](http://www.isc.meiji.ac.jp/~kokichis/Welcomee.html).
 
-+ You can only import two modules: `taichi` (`pip` installation guide below) and `scene.py` (in the repo).
-+ The code in `main.py` cannot exceed 99 lines. Each line cannot exceed 120 characters.
+The roof is seen as to be in different shape from special angles at front and back. But the real shape is in four irregular plates.
 
-The available APIs are:
+## Program style
 
-+ `scene = Scene(voxel_edges, exposure)`
-+ `scene.set_voxel(voxel_id, material, color)`
-+ `material, color = scene.get_voxel(voxel_id)`
-+ `scene.set_floor(height, color)`
-+ `scene.set_directional_light(dir, noise, color)`
-+ `scene.set_background_color(color)`
+The code is written in a bad style to fit within lines and words limits.
 
-Remember to call `scene.finish()` at last.
+## Screenshot and animation show
 
-**Taichi Lang documentation:** https://docs.taichi-lang.org/
+As special camera angles are needed for displaying, customized scene.py is used only for screenshot and development.
 
-**Modifying files other than `main.py` is not allowed.**
+Launching `python3 main.py` is not customized and uses original `scene.py`. While launching `python3 main_display_rotate.py` will utilize `scene_autorotate.py` with UI controlling modifications.
 
+The modification includes:
 
-## Installation
++ Auto rotation. Switched on/off by pressing 't'.
++ Set camera angle to front by pressing 'b'.
++ Set camera angle to back by pressing 'n'.
++ Manually rotates camera angle little by little by pressing 'm'.
 
-Make sure your `pip` is up-to-date:
+<p align="center">
+<img src="anim.gif" width="75%"></img>
+</p>
 
-```bash
-pip3 install pip --upgrade
-```
+> Animation to show rotation by 360 degrees.
 
-Assume you have a Python 3 environment, simply run:
+## Problems
 
-```bash
-pip3 install -r requirements.txt
-```
-
-to install the dependencies of the voxel renderer.
-
-## Quickstart
-
-```sh
-python3 example1.py  # example2/3/.../7/8.py
-```
-
-Mouse and keyboard interface:
-
-+ Drag with your left mouse button to rotate the camera.
-+ Press `W/A/S/D/Q/E` to move the camera.
-+ Press `P` to save a screenshot.
-
-## More examples
-
-<a href="https://github.com/raybobo/taichi-voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/city.jpg" width="45%"></img></a>  <a href="https://github.com/victoriacity/voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/city2.jpg" width="45%"></img></a> 
-<a href="https://github.com/yuanming-hu/voxel-art"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/tree2.jpg" width="45%"></img></a> <a href="https://github.com/neozhaoliang/voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/desktop.jpg" width="45%"></img></a> 
-<a href="https://github.com/maajor/maajor-voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/earring_girl.jpg" width="45%"></img></a>  <a href="https://github.com/rexwangcc/taichi-voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/pika.jpg" width="45%"></img></a> 
-<a href="https://github.com/houkensjtu/qbao_voxel_art"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/yinyang.jpg" width="45%"></img></a>  <a href="https://github.com/ltt1598/voxel-challenge"><img src="https://github.com/taichi-dev/public_files/blob/master/voxel-challenge/lang.jpg" width="45%"></img></a> 
-
-## Show your artwork 
-
-Please put your artwork at the beginning of this README file. Replacing the `demo.jpg` file with your creation will do the job.
+Lighting and car shape are too ugly. Needs enhancement, maybe including advanced algo and ideas.
+Codes needs to be more elegant for compressing code size.
