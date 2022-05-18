@@ -17,11 +17,15 @@ The roof is seen as to be in different shape from special angles at front and ba
 
 The code is written in a bad style to fit within lines and words limits.
 
+## Implementation
+
+The central idea is heavy use of functions to generate pixels of quadrilatterals especially parallelograms by interpolation to integer indexes while scanning along one direction for simplication. Then all parts(plates) for the roof and the car follow.
+
 ## Screenshot and animation show
 
 As special camera angles are needed for displaying, customized scene.py is used only for screenshot and development.
 
-Launching `python3 main.py` is not customized and uses original `scene.py`. While launching `python3 main_display_rotate.py` will utilize `scene_autorotate.py` with UI controlling modifications.
+Launching `python3 main.py` uses original `scene.py`. While launching `python3 main_display_rotate.py` will utilize `scene_autorotate.py` with UI controlling modifications.
 
 The modification includes:
 
@@ -39,4 +43,5 @@ The modification includes:
 ## Problems
 
 Lighting and car shape are too ugly. Needs enhancement, maybe including advanced algo and ideas.
-Codes needs to be more elegant for compressing code size.
+
+Codes needs to be more elegant for better representation power and also compressing code size.
